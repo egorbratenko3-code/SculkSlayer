@@ -1,0 +1,11 @@
+{
+  "values": [
+    "sculkslayer:hallow_block",
+    "sculkslayer:tainted_block",
+    "sculkslayer:decayed_block",
+    "sculkslayer:sculk_crystal",
+    "sculkslayer:sculk_crystal_block",
+    "sculkslayer:sculk_nest",
+    "sculkslayer:sculk_core"
+  ]
+}
