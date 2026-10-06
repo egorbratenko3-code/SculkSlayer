@@ -1,0 +1,141 @@
+plugins {
+	id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
+	id 'maven-publish'
+}
+
+repositories {
+	// Add repositories to retrieve artifacts from in here.
+	// You should only use this when depending on other mods because
+	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
+	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
+	// for more information about repositories.
+}
+
+loom {
+	splitEnvironmentSourceSets()
+
+	mods {
+		"sculkslayer" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
+}
+
+dependencies {
+	// To change the versions see the gradle.properties file
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings loom.officialMojangMappings()
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+	// Fabric API. This is technically optional, but you probably want it anyway.
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+}
+
+processResources {
+	def version = project.version
+	inputs.property "version", version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 21
+}
+
+// Fail the build when a registered item/block item has no item definition or
+// when any texture referenced by its item model (including parent models) is absent.
+tasks.register("verifyItemTextures") {
+	inputs.dir("src/main/resources/assets/sculkslayer")
+	inputs.files("src/main/java/dev/sculkslayer/registry/ModItems.java", "src/main/java/dev/sculkslayer/registry/ModBlocks.java")
+	doLast {
+		def assets = file("src/main/resources/assets")
+		def slayerAssets = new File(assets, "sculkslayer")
+		def slurper = new groovy.json.JsonSlurper()
+		def errors = []
+		def registeredItems = [] as Set
+		["ModItems.java", "ModBlocks.java"].each { sourceName ->
+			def source = new File("src/main/java/dev/sculkslayer/registry/${sourceName}").text
+			(source =~ /register\("([a-z0-9_]+)"/).each { match -> registeredItems.add(match[1]) }
+		}
+		registeredItems.each { itemName ->
+			def definition = new File(slayerAssets, "items/${itemName}.json")
+			if (!definition.isFile()) errors.add("Missing item definition: assets/sculkslayer/items/${itemName}.json")
+		}
+		def modelIds = [] as Set
+		def collectModels
+		collectModels = { value ->
+			if (value instanceof Map) {
+				if (value.type == "minecraft:model" && value.model instanceof String) modelIds.add(value.model)
+				value.values().each { collectModels(it) }
+			} else if (value instanceof List) value.each { collectModels(it) }
+		}
+		new File(slayerAssets, "items").eachFileMatch(~/.*\.json/) { definition ->
+			collectModels(slurper.parse(definition))
+		}
+		def visitedModels = [] as Set
+		def inspectModel
+		inspectModel = { String modelId ->
+			if (!modelId.contains(":")) modelId = "minecraft:${modelId}"
+			if (!visitedModels.add(modelId)) return
+			def parts = modelId.split(":", 2)
+			def modelFile = new File(assets, "${parts[0]}/models/${parts[1]}.json")
+			if (!modelFile.isFile()) {
+				if (parts[0] == "sculkslayer") errors.add("Missing item model: ${modelFile}")
+				return
+			}
+			def model = slurper.parse(modelFile)
+			if (model.parent instanceof String && model.parent.contains(":")) inspectModel(model.parent)
+			(model.textures ?: [:]).values().each { textureId ->
+				if (!(textureId instanceof String) || textureId.startsWith("#")) return
+				if (!textureId.contains(":")) textureId = "minecraft:${textureId}"
+				def textureParts = textureId.split(":", 2)
+				def textureFile = new File(assets, "${textureParts[0]}/textures/${textureParts[1]}.png")
+				if (!textureFile.isFile()) errors.add("Missing item texture: ${textureFile}")
+			}
+		}
+		modelIds.each { inspectModel(it) }
+		if (!errors.isEmpty()) throw new GradleException("Item texture validation failed:\n - " + errors.unique().join("\n - "))
+		logger.lifecycle("Verified ${registeredItems.size()} registered item IDs and ${modelIds.size()} item models; all referenced textures exist.")
+	}
+}
+
+tasks.named("check") { dependsOn("verifyItemTextures") }
+
+java {
+	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+	// if it is present.
+	// If you remove this line, sources will not be generated.
+	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
+}
+
+jar {
+	def projectName = project.name
+	inputs.property "projectName", projectName
+
+	from("LICENSE") {
+		rename { "${it}_$projectName"}
+	}
+}
+
+// configure the maven publication
+publishing {
+	publications {
+		create("mavenJava", MavenPublication) {
+			from components.java
+		}
+	}
+
+	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+	repositories {
+		// Add repositories to publish to here.
+		// Notice: This block does NOT have the same function as the block in the top level.
+		// The repositories here will be used for publishing your artifact, not for
+		// retrieving dependencies.
+	}
+}
