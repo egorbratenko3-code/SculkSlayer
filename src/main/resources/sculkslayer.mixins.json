@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "dev.sculkslayer.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "LivingEntityMixin",
+    "MobAccessor",
+    "CreeperMixin"
+  ],
+  "client": [
+    "WaterTintMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

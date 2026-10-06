@@ -1,0 +1,22 @@
+{
+	"schemaVersion": 1,
+	"id": "sculkslayer",
+	"version": "${version}",
+	"name": "Sculk Slayer",
+	"description": "A sculk plague slowly consumes the world. Build the Hallow arsenal, hold the line and destroy the Sculk Core.",
+	"authors": ["Sculk Slayer"],
+	"license": "MIT",
+	"icon": "assets/sculkslayer/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": ["dev.sculkslayer.SculkSlayer"],
+		"client": ["dev.sculkslayer.client.SculkSlayerClient"]
+	},
+	"mixins": ["sculkslayer.mixins.json"],
+	"depends": {
+		"fabricloader": ">=0.18.0",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
