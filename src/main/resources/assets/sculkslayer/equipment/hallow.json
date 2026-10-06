@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "sculkslayer:hallow"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "sculkslayer:hallow"
+      }
+    ]
+  }
+}

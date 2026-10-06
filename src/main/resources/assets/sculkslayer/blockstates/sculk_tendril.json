@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "sculkslayer:block/sculk_tendril",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "sculkslayer:block/sculk_tendril",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "sculkslayer:block/sculk_tendril",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "sculkslayer:block/sculk_tendril",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "sculkslayer:block/sculk_tendril"
+    },
+    "facing=west": {
+      "model": "sculkslayer:block/sculk_tendril",
+      "x": 90,
+      "y": 270
+    }
+  }
+}
