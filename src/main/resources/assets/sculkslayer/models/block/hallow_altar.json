@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "sculkslayer:block/hallow_altar_top",
+    "side": "sculkslayer:block/hallow_altar_side",
+    "bottom": "sculkslayer:block/hallow_block"
+  }
+}

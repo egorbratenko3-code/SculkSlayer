@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "sculkslayer:block/sculk_pebbles"
+  }
+}

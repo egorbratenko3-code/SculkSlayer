@@ -1,0 +1,4 @@
+{
+  "parent": "minecraft:item/template_spawn_egg",
+  "textures": {"layer0": "sculkslayer:item/sculk_creeper_spawn_egg"}
+}

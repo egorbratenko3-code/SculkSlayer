@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "sculkslayer:item/hallow_pickaxe"
+  }
+}
