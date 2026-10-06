@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:shield",
+    "sculkslayer:sacrament",
+    "sculkslayer:hallow_bar"
+  ],
+  "result": {
+    "id": "sculkslayer:hallow_shield",
+    "count": 1
+  }
+}

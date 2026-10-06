@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "sculkslayer:hallow_bar",
+    "minecraft:birch_planks"
+  ],
+  "result": {
+    "id": "sculkslayer:hallow_wood",
+    "count": 1
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:netherite_helmet",
+    "sculkslayer:sacrament",
+    "sculkslayer:hallow_block",
+    "sculkslayer:hallow_block",
+    "sculkslayer:hallow_block",
+    "sculkslayer:hallow_block"
+  ],
+  "result": {
+    "id": "sculkslayer:hallow_helmet",
+    "count": 1
+  }
+}

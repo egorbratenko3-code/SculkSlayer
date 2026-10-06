@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "sculkslayer:sacrament",
+    "sculkslayer:sculk_crystal_block",
+    "sculkslayer:hallow_block",
+    "sculkslayer:hallow_block",
+    "sculkslayer:hallow_block",
+    "sculkslayer:hallow_block",
+    "sculkslayer:hallow_block",
+    "sculkslayer:hallow_block",
+    "sculkslayer:hallow_block"
+  ],
+  "result": {
+    "id": "sculkslayer:sacrament",
+    "count": 2
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "values": [
+    "sculkslayer:hallow_block",
+    "sculkslayer:hallow_wood",
+    "sculkslayer:hallow_altar",
+    "sculkslayer:sculk_core",
+    "minecraft:bedrock",
+    "minecraft:obsidian",
+    "minecraft:crying_obsidian",
+    "minecraft:reinforced_deepslate",
+    "minecraft:end_portal_frame",
+    "minecraft:barrier",
+    "minecraft:budding_amethyst",
+    "minecraft:spawner"
+  ]
+}

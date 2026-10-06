@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "BTB",
+    "TCT",
+    "BTB"
+  ],
+  "key": {
+    "B": "sculkslayer:hallow_block",
+    "T": "minecraft:tnt",
+    "C": "sculkslayer:crucifix"
+  },
+  "result": {
+    "id": "sculkslayer:holy_grenade",
+    "count": 1
+  }
+}

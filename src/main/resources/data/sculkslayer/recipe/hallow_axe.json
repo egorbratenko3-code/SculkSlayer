@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": ["sculkslayer:hallow_bar", "sculkslayer:hallow_bar", "sculkslayer:hallow_bar", "sculkslayer:hallow_bar", "sculkslayer:sacrament", "minecraft:netherite_axe"],
+  "result": {"id": "sculkslayer:hallow_axe", "count": 1}
+}

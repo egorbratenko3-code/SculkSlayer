@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "OBO",
+    "BCB",
+    "OBO"
+  ],
+  "key": {
+    "O": "minecraft:obsidian",
+    "B": "sculkslayer:hallow_block",
+    "C": "minecraft:crafting_table"
+  },
+  "result": {
+    "id": "sculkslayer:hallow_altar",
+    "count": 1
+  }
+}

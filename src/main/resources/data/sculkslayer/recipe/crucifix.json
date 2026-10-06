@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "NBN",
+    "BTB",
+    "NBN"
+  ],
+  "key": {
+    "N": "minecraft:netherite_ingot",
+    "B": "sculkslayer:hallow_block",
+    "T": "minecraft:totem_of_undying"
+  },
+  "result": {
+    "id": "sculkslayer:crucifix",
+    "count": 1
+  }
+}
